@@ -30,31 +30,22 @@ public class BussresaBokningssystem {
             int val = input.nextInt();
             switch (val) {
                 case 1:
+                    System.out.println("Ange födelsedatum (yyyymmdd) för passageraren:");
+                    int fodelseDatum = input.nextInt();
                     if (antalBokadePlatser == maxAntalPlatser) {
                         System.out.println("Tyvärr är alla platser uppbokade.");
                     } else {
-                        System.out.println("Ange födelsedatum (yyyymmdd) för passageraren:");
-                        int fodelseDatum = input.nextInt();
-                        boolean finns = false;
-                        for (int i = 0; i < maxAntalPlatser; i++) {
-                            if (bokadePlatser[i] > 0) {
-                                finns = true;
+                        for (int i = 0; i <= maxAntalPlatser; i++) {
+                        
+                            if (bokadePlatser[i] == 0) {
+                                bokadePlatser[i] = fodelseDatum;
+                                antalBokadePlatser++;
+                                System.out.println("Plats bokad!");
                                 break;
-                            }
-                        }
-                        if (finns) {
-                            System.out.println("Platsen är redan uppbokad. Försök igen.");
-                        } else {
-                            for (int i = 0; i < maxAntalPlatser; i++) {
-                                if (bokadePlatser[i] == 0) {
-                                    bokadePlatser[i] = fodelseDatum;
-                                    antalBokadePlatser++;
-                                    System.out.println("Plats bokad!");
-                                    break;
                                 }
                             }
                         }
-                    }
+                    
                     break;
                 case 2:
                     int ledigaPlatser = maxAntalPlatser - antalBokadePlatser;
@@ -110,19 +101,18 @@ public class BussresaBokningssystem {
                     break;
                 case 6:
                     for (int z = 0; z < 21; z++) {
-                        if (20230512 - bokadePlatser[z] > 180000){
-                            System.out.println("Plats " +(z+1)+" är uppbokad av en person över 18 år");
+                        if(20230512 - bokadePlatser[z] == 20230512){
+                            System.out.println("Inga fler platser är uppbokade");
                             break;
+                            }
+                        else if (20230512 - bokadePlatser[z] > 180000){
+                            System.out.println("Plats " +(z+1)+" är uppbokad av en person över 18 år");
                         }
                         else if(20230512 - bokadePlatser[z] < 180000){
                             System.out.println("Plats " +(z+1)+" är uppbokad av en person under 18 år");
-                            break;
-                                }
-                        else if(20230512 - bokadePlatser[z] == 20230512){
-                            break;
-                        }
+                                }                       
                     }
-                    System.out.println("Inga fler platser är uppbokade");
+                   
                     break;
                 case 7:
                     if (antalBokadePlatser == maxAntalPlatser) {
@@ -130,7 +120,7 @@ public class BussresaBokningssystem {
                     } 
                     else{
                         System.out.println("Ange födelsedatum (yyyymmdd) för passageraren:");
-                        int fodelseDatum = input.nextInt();
+                        fodelseDatum = input.nextInt();
                         for(int i = 0; i < maxAntalPlatser; i++) {
                             if(bokadePlatser[i] > 0){
                                 i++;
